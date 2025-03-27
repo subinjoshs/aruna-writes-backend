@@ -26,4 +26,11 @@ export class Story {
 
   @UpdateDateColumn()
   updatedAt: Date;
+   // ✅ New Field: Comments (JSON format for storing multiple comments)
+   @Column({ type: 'json', nullable: true, default: [] })
+   comments: { userId: number; comment: string; createdAt: Date }[];
+ 
+   // ✅ New Field: Views (Integer count)
+   @Column({ type: 'int', default: 0 })
+   views: number;
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Req, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, Req, UsePipes, ValidationPipe } from '@nestjs/common';
 import { StoriesService } from './stories.service';
 import { CreateStoryDto } from './dto/create-story.dto';
 import { Story } from './entities/story.entity';
@@ -21,11 +21,12 @@ export class StoriesController {
     const userId = req.user.id; // Extract user ID from JWT token
     return this.storiesService.updateStory(storyId, userId, updateData);
   }
-  @Delete(':id')
-  async deleteStory(@Param('id') storyId: number, @Req() req) {
-    const userId = req.user.id; // Get the logged-in user's ID from JWT token
+  @Post('delete')
+  async deleteStory(@Body() body: { storyId: number; userId: number }) {
+    const { storyId, userId } = body;
     return this.storiesService.deleteStory(storyId, userId);
   }
+  
 
   @Get('by-users')
   async getStoriesByUserIds(@Query('userIds') userIds: string) {
@@ -34,14 +35,24 @@ export class StoriesController {
   }
 
   @Get('sorted-stories')
-async getSortedStories() {
-  return this.storiesService.getSortedStories();
-}
+  async getSortedStories() {
+    return this.storiesService.getSortedStories();
+  }
 
-@Get('type/:storyType')
+  @Get('type/:storyType')
   async getStoriesByType(@Param('storyType') storyType: string) {
     return this.storiesService.getStoriesByType(storyType);
   }
-
-
+  @Get(':storyId')
+  async getStoryById(@Param('storyId', ParseIntPipe) storyId: number) {
+    return this.storiesService.getStoryById(storyId);
+  }
+  @Post(':storyId/comment')
+  async addComment(
+    @Param('storyId', ParseIntPipe) storyId: number,
+    @Body() body: { userId: number; comment: string }
+  ) {
+    return this.storiesService.addComment(storyId, body.userId, body.comment);
+  }
+  
 }
