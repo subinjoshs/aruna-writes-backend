@@ -15,6 +15,9 @@ import { StoriesModule } from './stories/stories.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
+      ssl: {
+        rejectUnauthorized: false, // Allows self-signed certificates
+      },
       synchronize: true,
       entities: ['dist/**/*.entity{.ts,.js}'],
       migrations: [],
