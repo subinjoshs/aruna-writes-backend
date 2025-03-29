@@ -15,11 +15,9 @@ export class StoriesController {
   @Patch(':id')
   async updateStory(
     @Param('id') storyId: number,
-    @Body() updateData: Partial<Story>,
-    @Req() req
+    @Body() body: { userId: number; content: string}
   ) {
-    const userId = req.user.id; // Extract user ID from JWT token
-    return this.storiesService.updateStory(storyId, userId, updateData);
+    return this.storiesService.updateStory(storyId, body?.userId, body);
   }
   @Post('delete')
   async deleteStory(@Body() body: { storyId: number; userId: number }) {
@@ -54,5 +52,6 @@ export class StoriesController {
   ) {
     return this.storiesService.addComment(storyId, body.userId, body.comment);
   }
+  
   
 }

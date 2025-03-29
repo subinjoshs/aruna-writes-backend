@@ -31,7 +31,7 @@ export class StoriesService {
   async updateStory(
     storyId: number,
     userId: number,
-    updateData: Partial<Story>
+    updateData: any
   ): Promise<{ statusCode: number; message: string }> {
     const story = await this.storyRepo.findOne({
       where: { id: storyId, author: { id: userId } }, // ✅ Ensure correct relation query
@@ -206,7 +206,6 @@ export class StoriesService {
       message: 'Comment added successfully',
       data: newComment,
     };
-  }
-  
+  }  
 
 }

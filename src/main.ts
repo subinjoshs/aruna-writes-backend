@@ -8,7 +8,7 @@ async function bootstrap() {
   app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
   app.enableCors({
-    origin: '*', // Allow all origins (change this for production)
+    origin: 'https://arunastamilnovels.com', // Allow all origins (change this for production)
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
   });
