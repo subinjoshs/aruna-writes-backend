@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, UnauthorizedException, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './create-user.dto';
 import * as bcrypt from 'bcryptjs';
@@ -74,4 +74,9 @@ export class UsersController {
     };
 
   }
+  @Get('all')
+  async getAllUsers() {
+    return this.usersService.getAllUsers();
+  }
+
 }

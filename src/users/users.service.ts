@@ -98,4 +98,13 @@ export class UsersService {
     async findAuthors(): Promise<User[]> {
         return this.usersRepository.find({ where: { role: UserRole.ADMIN } });
     }
+    async getAllUsers(): Promise<{ statusCode: number; data: any[] }> {
+        const users = await this.usersRepository.find();
+      
+        // Remove password from each user object
+        const usersWithoutPassword = users.map(({ password, ...user }) => user);
+      
+        return { statusCode: 200, data: usersWithoutPassword };
+      }
+      
 }
