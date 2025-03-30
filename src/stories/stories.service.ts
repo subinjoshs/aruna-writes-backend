@@ -188,7 +188,7 @@ export class StoriesService {
       },
     };
   }
-  async addComment(storyId: number, userId: number, comment: string) {
+  async addComment(storyId: number, userId: number, comment: string,authorName:string) {
     const story = await this.storyRepo.findOne({ where: { id: storyId } });
   
     if (!story) {
@@ -196,7 +196,7 @@ export class StoriesService {
     }
   
     // ✅ Append new comment to the array
-    const newComment = { userId, comment, createdAt: new Date() };
+    const newComment = { userId, comment, createdAt: new Date(),authorName };
     story.comments = [...story.comments, newComment];
   
     await this.storyRepo.save(story);

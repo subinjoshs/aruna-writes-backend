@@ -48,9 +48,9 @@ export class StoriesController {
   @Post(':storyId/comment')
   async addComment(
     @Param('storyId', ParseIntPipe) storyId: number,
-    @Body() body: { userId: number; comment: string }
+    @Body() body: { userId: number; comment: string ;authorName:string}
   ) {
-    return this.storiesService.addComment(storyId, body.userId, body.comment);
+    return this.storiesService.addComment(storyId, body.userId, body.comment,body?.authorName);
   }
   
   
