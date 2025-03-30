@@ -9,7 +9,8 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:4200', // Local frontend
-      'https://arunastamilnovels.com' // Deployed frontend (Firebase)
+      'https://arunastamilnovels.com',
+      'https://api.arunastamilnovels.com' // Deployed frontend (Firebase)
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
