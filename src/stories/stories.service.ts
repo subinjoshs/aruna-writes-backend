@@ -123,7 +123,8 @@ export class StoriesService {
         comments: story.comments,
         author: {
           name: story.author?.username || 'Unknown',
-          profilePicture: story.author?.profilePicture || null
+          profilePicture: story.author?.profilePicture || null,
+          id:story.author.id || null
         }
       }));
     return {
